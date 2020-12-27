@@ -1,13 +1,16 @@
 extends RigidBody2D
 
-func _on_Timer_timeout() -> void:
-	queue_free()
-
-func _on_Area2D_body_entered(_body) -> void:
-	queue_free()
+var target : Vector2 = Vector2.ZERO
+		
+func start(tg : Vector2) -> void:
+	target = tg
 
 func _on_Area2D_area_entered(area) -> void:
-	if area.get_parent().has_method("take_damage"):
-		pass
-#		area.get_parent().take_damage()
-#		queue_free()
+	set_deferred("mode", 1)
+	$AnimatedSprite.set_deferred("playing", true)
+	if area.name == "Point":
+		area.queue_free()
+
+
+func _on_AnimatedSprite_animation_finished():
+	queue_free()

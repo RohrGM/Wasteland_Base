@@ -2,10 +2,12 @@ extends KinematicBody2D
 
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var st : PackedScene = preload("res://PackedScene/Stone.tscn")
+onready var pt : PackedScene = preload("res://Point.tscn")
 
 var home_pos : Vector2 = Vector2.ZERO
 var enemys : Array = []
 var mv : Node2D = null
+var target_pos : Vector2 = Vector2.ZERO
 
 signal death()
 
@@ -16,7 +18,7 @@ func _ready() -> void:
 	
 func _physics_process(_delta):
 	
-	$Range.look_at(enemys[0].position)
+
 	if enemys[0].position.distance_to(position) > 500:
 		move_at(enemys[0].position)
 	else:
@@ -98,15 +100,21 @@ func attack() -> void:
 	set_physics_process(false)
 	stop_move()
 	
-func shoot():
-	spaw_b(0)
+func shoot() -> void:	
+	spaw_b(0, enemys[0].position)
 	
-func spaw_b( value : int = 0) -> void:
+func spaw_b( value : int = 0, pos : Vector2 = Vector2.ZERO) -> void:
+	$Range.look_at(enemys[0].position)
 	var bullet_inst : RigidBody2D = st.instance()
 	bullet_inst.position = $Range/Spaw.global_position
 	bullet_inst.rotation_degrees = $Range.rotation_degrees 
-	bullet_inst.apply_impulse(Vector2(), Vector2(200, -50).rotated($Range.rotation + value))
+	bullet_inst.apply_impulse(Vector2(), Vector2(200, (position.distance_to(pos)) / 3 * -1 ).rotated($Range.rotation + value))
+	bullet_inst.start(pos)
 	get_parent().add_child(bullet_inst)
+	
+	var point : Node2D = pt.instance()
+	get_parent().add_child(point)
+	point.position = pos
 	
 func take_damage(_value : int = 1) -> void:
 	dead()
