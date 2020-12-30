@@ -1,6 +1,5 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=40 format=2]
 
-[ext_resource path="res://Scripts/MoveAt.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Slug.gd" type="Script" id=2]
 [ext_resource path="res://slug.png" type="Texture" id=3]
 
@@ -20,6 +19,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 11 ), Vector2( 1, 11 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_physics_process"
+} ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack_forward"
@@ -36,6 +49,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 10 ), Vector2( 1, 10 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_physics_process"
+} ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -54,6 +81,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Vector2( 0, 9 ), Vector2( 1, 9 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_physics_process"
+} ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "attack_right"
@@ -70,6 +111,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 8 ), Vector2( 1, 8 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_physics_process"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -94,12 +149,9 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1.95 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -249,9 +301,6 @@ blend_point_3/node = SubResource( 17 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=19]
-animation = "dead"
-
 [sub_resource type="AnimationNodeAnimation" id=20]
 animation = "idle_forward"
 
@@ -304,32 +353,20 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
-priority = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-priority = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-priority = 2
-
 [sub_resource type="AnimationNodeStateMachine" id=37]
 states/Attack/node = SubResource( 18 )
 states/Attack/position = Vector2( 638, 151 )
-states/Dead/node = SubResource( 19 )
-states/Dead/position = Vector2( 475, 287 )
 states/Idle/node = SubResource( 24 )
 states/Idle/position = Vector2( 475, 151 )
 states/Run/node = SubResource( 29 )
 states/Run/position = Vector2( 331, 151 )
-transitions = [ "Idle", "Run", SubResource( 30 ), "Run", "Idle", SubResource( 31 ), "Idle", "Dead", SubResource( 32 ), "Idle", "Attack", SubResource( 33 ), "Attack", "Idle", SubResource( 34 ), "Attack", "Dead", SubResource( 35 ), "Run", "Dead", SubResource( 36 ) ]
+transitions = [ "Idle", "Run", SubResource( 30 ), "Run", "Idle", SubResource( 31 ), "Idle", "Attack", SubResource( 33 ), "Attack", "Idle", SubResource( 34 ) ]
 start_node = "Idle"
-end_node = "Dead"
-graph_offset = Vector2( 168, 81 )
+graph_offset = Vector2( 154, 135 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=38]
 
@@ -386,7 +423,6 @@ rotation = 1.5708
 shape = SubResource( 39 )
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 monitoring = false
 collision_layer = 16
 collision_mask = 16
@@ -403,10 +439,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
 shape = SubResource( 41 )
-
-[node name="MoveAt" type="Node" parent="."]
-script = ExtResource( 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
 [connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]
-[connection signal="in_position" from="MoveAt" to="." method="_on_MoveAt_in_position"]

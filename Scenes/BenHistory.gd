@@ -1,6 +1,6 @@
 extends Navigation2D
 
-onready var slug : PackedScene = preload("res://Slug.tscn")
+onready var slug : PackedScene = preload("res://Slug/Slug.tscn")
 
 var stage : int = 0
 var deaths : int = 0

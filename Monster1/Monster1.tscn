@@ -365,34 +365,34 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=44]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "range_right"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
-priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
-priority = 2
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=36]
+[sub_resource type="AnimationNodeStateMachine" id=39]
 states/Attack/node = SubResource( 17 )
 states/Attack/position = Vector2( 638, 151 )
 states/Dead/node = SubResource( 18 )
@@ -401,33 +401,33 @@ states/Idle/node = SubResource( 23 )
 states/Idle/position = Vector2( 475, 151 )
 states/Run/node = SubResource( 28 )
 states/Run/position = Vector2( 331, 151 )
-states/range_right/node = SubResource( 44 )
+states/range_right/node = SubResource( 29 )
 states/range_right/position = Vector2( 475, 37 )
-transitions = [ "Idle", "Run", SubResource( 29 ), "Run", "Idle", SubResource( 30 ), "Idle", "Dead", SubResource( 31 ), "Idle", "Attack", SubResource( 32 ), "Attack", "Idle", SubResource( 33 ), "Attack", "Dead", SubResource( 34 ), "Run", "Dead", SubResource( 35 ), "Idle", "range_right", SubResource( 45 ), "range_right", "Idle", SubResource( 46 ) ]
+transitions = [ "Idle", "Run", SubResource( 30 ), "Run", "Idle", SubResource( 31 ), "Idle", "Dead", SubResource( 32 ), "Idle", "Attack", SubResource( 33 ), "Attack", "Idle", SubResource( 34 ), "Attack", "Dead", SubResource( 35 ), "Run", "Dead", SubResource( 36 ), "Idle", "range_right", SubResource( 37 ), "range_right", "Idle", SubResource( 38 ) ]
 start_node = "Idle"
 end_node = "Dead"
 graph_offset = Vector2( 64.5783, 3 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=37]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=40]
 
-[sub_resource type="CapsuleShape2D" id=38]
+[sub_resource type="CapsuleShape2D" id=41]
 radius = 2.26796
 height = 2.3397
 
-[sub_resource type="CircleShape2D" id=39]
+[sub_resource type="CircleShape2D" id=42]
 radius = 10.6247
 
-[sub_resource type="CircleShape2D" id=40]
+[sub_resource type="CircleShape2D" id=43]
 radius = 143.391
 
-[sub_resource type="Gradient" id=41]
+[sub_resource type="Gradient" id=44]
 offsets = PoolRealArray( 0, 0.977778 )
 colors = PoolColorArray( 1, 1, 1, 0.678431, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=42]
-gradient = SubResource( 41 )
+[sub_resource type="GradientTexture" id=45]
+gradient = SubResource( 44 )
 
-[sub_resource type="ParticlesMaterial" id=43]
+[sub_resource type="ParticlesMaterial" id=46]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -437,7 +437,7 @@ initial_velocity = 20.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = -720.0
-color_ramp = SubResource( 42 )
+color_ramp = SubResource( 45 )
 
 [node name="Monster1" type="KinematicBody2D"]
 collision_layer = 17
@@ -449,7 +449,7 @@ position = Vector2( 0.140312, -15.9951 )
 texture = ExtResource( 1 )
 vframes = 16
 hframes = 12
-frame = 1
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_behind = SubResource( 1 )
@@ -468,10 +468,10 @@ anims/run_left = SubResource( 13 )
 anims/run_right = SubResource( 14 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 36 )
+tree_root = SubResource( 39 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 37 )
+parameters/playback = SubResource( 40 )
 parameters/Attack/blend_position = Vector2( 0.00205338, 0.991379 )
 parameters/Idle/blend_position = Vector2( 0.852156, -0.0344827 )
 parameters/Run/blend_position = Vector2( 0.647469, 0.0147454 )
@@ -480,7 +480,7 @@ parameters/Run/blend_position = Vector2( 0.647469, 0.0147454 )
 visible = false
 position = Vector2( -0.150685, -0.0562285 )
 rotation = 1.5708
-shape = SubResource( 38 )
+shape = SubResource( 41 )
 
 [node name="HitBox" type="Area2D" parent="."]
 visible = false
@@ -489,7 +489,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource( 39 )
+shape = SubResource( 42 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -498,7 +498,7 @@ autostart = true
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
-shape = SubResource( 40 )
+shape = SubResource( 43 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( -17.0086, -2.72057 )
@@ -509,7 +509,7 @@ one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 43 )
+process_material = SubResource( 46 )
 
 [node name="Range" type="Position2D" parent="."]
 position = Vector2( -15.1532, -45.4597 )
@@ -517,7 +517,6 @@ rotation = -0.00222515
 
 [node name="Spaw" type="Position2D" parent="Range"]
 rotation = 0.00222515
-scale = Vector2( 1, 1 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
 [connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]

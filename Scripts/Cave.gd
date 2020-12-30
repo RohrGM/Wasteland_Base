@@ -20,7 +20,6 @@ const ben : Dictionary = {
 	}
 }
 
-
 func _ready() -> void:
 	$Gui/Dialogue.connect("end_dialogue", self, "_end_dialogue")
 	$Gui/Dialogue.start(ben[0])
@@ -28,7 +27,6 @@ func _ready() -> void:
 	$YSort/Farm.set_cam(Vector2(.5, .5))
 	
 func _end_dialogue() -> void:
-	print(stage)
 	match(stage):
 		0:
 			stage += 1

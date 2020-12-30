@@ -1,17 +1,25 @@
 extends KinematicBody2D
 
+onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
+onready var st : PackedScene = preload("res://PackedScene/Stone.tscn")
+onready var pt : PackedScene = preload("res://Point.tscn")
+
 var home_pos : Vector2 = Vector2.ZERO
 var enemys : Array = []
+var mv : Node2D = null
+var target_pos : Vector2 = Vector2.ZERO
 
 signal death()
 
 func _ready() -> void:
 	home_pos = position
 	set_physics_process(false)
+	travel_anim("Idle")
 	
 func _physics_process(_delta):
-	if enemys[0].position.distance_to(position) > 20:
-		$MoveAt.move(enemys[0].position)
+	
+	if enemys[0].position.distance_to(position) > 10:
+		move_at(enemys[0].position)
 	else:
 		attack()
 	
@@ -34,13 +42,27 @@ func new_action() -> void:
 			while new_pos.distance_to(home_pos) > 100:
 				new_pos = sort_pos(position)
 				
-		$MoveAt.move(new_pos)
+		move_at(new_pos)
 	
 	else:
 		update_anim_tree(sort_direction())
 		$Timer.wait_time = rand_range(1, 5)
 		$Timer.start()
 		
+func move_at(pos : Vector2) -> void:
+	stop_move()
+	mv = m.instance()
+	add_child(mv)
+	mv.start(pos)
+	mv.connect("in_position", self, "_on_MoveAt_in_position")
+	mv.start(pos)
+	
+func stop_move() -> void:
+	if mv != null:
+		mv.queue_free()
+	if enemys.size() < 1:
+		travel_anim("Idle")
+
 func sort_direction() -> Vector2:
 	var new_direction : Vector2 = Vector2(rand_range(0,1), rand_range(0,1))
 	return new_direction
@@ -72,22 +94,17 @@ func attack() -> void:
 	input_vector.y = enemys[0].position.y - position.y
 	
 	update_anim_tree(input_vector.normalized())
-	
 	travel_anim("Attack")
+	set_physics_process(false)
+	stop_move()
 	
 func take_damage(_value : int = 1) -> void:
 	dead()
 
 func dead() -> void:
-	set_physics_process(false)
-	travel_anim("Dead")
-	$MoveAt.stop_move()
-	$View.monitoring = false
-	$HitBox.queue_free()
-	$Timer.queue_free()
-	$CollisionShape2D.queue_free()
+	stop_move()
+	queue_free()
 	emit_signal("death")
-	set_script(null)
 
 func _on_Timer_timeout() -> void:
 	new_action()
@@ -100,6 +117,7 @@ func _on_MoveAt_in_position() -> void:
 		
 func _on_View_body_entered(body) -> void:
 	if body.is_in_group("Player"):
+		$Timer.stop()
 		enemys.append(body)
 		set_physics_process(true)
 
@@ -108,6 +126,6 @@ func _on_View_body_exited(body) -> void:
 		enemys.erase(body)
 		if enemys.size() < 1:
 			set_physics_process(false)
-			$MoveAt.stop_move()
+			stop_move()
 			$Timer.start()
 
