@@ -52,7 +52,7 @@ func spaw_p() -> void:
 func slug_death() -> void:
 	if stage == 1:
 		deaths += 1
-		$Gui/Objective.text = "Elimine as pragas " + String(15 - deaths) + "/15"
+		$Gui/Objective.text = "Elimine as pragas " + String(0 + deaths) + "/15"
 		match deaths:
 			5: 
 				$YSort/Farm/CanvasLayer/Ballon.ballon_text("Merda, sujei minha bota")

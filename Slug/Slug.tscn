@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Scripts/Slug.gd" type="Script" id=2]
-[ext_resource path="res://slug.png" type="Texture" id=3]
+[ext_resource path="res://Slug/slug.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_behind"
@@ -301,83 +301,83 @@ blend_point_3/node = SubResource( 17 )
 blend_point_3/pos = Vector2( 0, -1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "idle_forward"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "idle_behind"
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "idle_right"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "idle_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=24]
-blend_point_0/node = SubResource( 20 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=23]
+blend_point_0/node = SubResource( 19 )
 blend_point_0/pos = Vector2( 0, 1 )
-blend_point_1/node = SubResource( 21 )
+blend_point_1/node = SubResource( 20 )
 blend_point_1/pos = Vector2( 0, -1 )
-blend_point_2/node = SubResource( 22 )
+blend_point_2/node = SubResource( 21 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 23 )
+blend_point_3/node = SubResource( 22 )
 blend_point_3/pos = Vector2( -1, 0 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "run_forward"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "run_right"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "run_behind"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "run_left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=29]
-blend_point_0/node = SubResource( 25 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=28]
+blend_point_0/node = SubResource( 24 )
 blend_point_0/pos = Vector2( 0, 1.1 )
-blend_point_1/node = SubResource( 26 )
+blend_point_1/node = SubResource( 25 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 27 )
+blend_point_2/node = SubResource( 26 )
 blend_point_2/pos = Vector2( 0, -1.1 )
-blend_point_3/node = SubResource( 28 )
+blend_point_3/node = SubResource( 27 )
 blend_point_3/pos = Vector2( -1, 0 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-
-[sub_resource type="AnimationNodeStateMachine" id=37]
+[sub_resource type="AnimationNodeStateMachine" id=33]
 states/Attack/node = SubResource( 18 )
 states/Attack/position = Vector2( 638, 151 )
-states/Idle/node = SubResource( 24 )
+states/Idle/node = SubResource( 23 )
 states/Idle/position = Vector2( 475, 151 )
-states/Run/node = SubResource( 29 )
+states/Run/node = SubResource( 28 )
 states/Run/position = Vector2( 331, 151 )
-transitions = [ "Idle", "Run", SubResource( 30 ), "Run", "Idle", SubResource( 31 ), "Idle", "Attack", SubResource( 33 ), "Attack", "Idle", SubResource( 34 ) ]
+transitions = [ "Idle", "Run", SubResource( 29 ), "Run", "Idle", SubResource( 30 ), "Idle", "Attack", SubResource( 31 ), "Attack", "Idle", SubResource( 32 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 154, 135 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=38]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=34]
 
-[sub_resource type="CapsuleShape2D" id=39]
+[sub_resource type="CapsuleShape2D" id=35]
 radius = 2.26796
 height = 2.3397
 
-[sub_resource type="CircleShape2D" id=40]
+[sub_resource type="CircleShape2D" id=36]
 radius = 10.6247
 
-[sub_resource type="CircleShape2D" id=41]
+[sub_resource type="CircleShape2D" id=37]
 radius = 53.0024
 
 [node name="Slug" type="KinematicBody2D"]
@@ -386,7 +386,6 @@ collision_mask = 17
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.25, -0.625 )
 texture = ExtResource( 3 )
 vframes = 14
 hframes = 4
@@ -408,10 +407,10 @@ anims/run_left = SubResource( 12 )
 anims/run_right = SubResource( 13 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 37 )
+tree_root = SubResource( 33 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 38 )
+parameters/playback = SubResource( 34 )
 parameters/Attack/blend_position = Vector2( 0.180193, 0.612069 )
 parameters/Idle/blend_position = Vector2( 0.0508941, 0.543103 )
 parameters/Run/blend_position = Vector2( 0.647469, 0.0147454 )
@@ -420,7 +419,7 @@ parameters/Run/blend_position = Vector2( 0.647469, 0.0147454 )
 visible = false
 position = Vector2( -0.150685, -0.0562285 )
 rotation = 1.5708
-shape = SubResource( 39 )
+shape = SubResource( 35 )
 
 [node name="HitBox" type="Area2D" parent="."]
 monitoring = false
@@ -428,7 +427,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource( 40 )
+shape = SubResource( 36 )
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
@@ -438,7 +437,7 @@ visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
-shape = SubResource( 41 )
+shape = SubResource( 37 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
 [connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]

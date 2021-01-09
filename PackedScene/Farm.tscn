@@ -1188,7 +1188,7 @@ position = Vector2( 1, -13 )
 texture = ExtResource( 1 )
 vframes = 16
 hframes = 6
-frame = 12
+frame = 13
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_behind = SubResource( 1 )

@@ -3,11 +3,13 @@ extends KinematicBody2D
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var st : PackedScene = preload("res://PackedScene/Stone.tscn")
 onready var pt : PackedScene = preload("res://Point.tscn")
+onready var dd : PackedScene = preload("res://Slug/BloodDead.tscn")
 
 var home_pos : Vector2 = Vector2.ZERO
 var enemys : Array = []
 var mv : Node2D = null
 var target_pos : Vector2 = Vector2.ZERO
+var alive : bool = true
 
 signal death()
 
@@ -103,8 +105,14 @@ func take_damage(_value : int = 1) -> void:
 
 func dead() -> void:
 	stop_move()
-	queue_free()
+	alive = false
+	var blood : AnimatedSprite = dd.instance()
+	get_parent().add_child(blood)
+	blood.position = position	
+	blood.playing = true
 	emit_signal("death")
+	queue_free()
+	
 
 func _on_Timer_timeout() -> void:
 	new_action()
