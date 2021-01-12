@@ -44,15 +44,27 @@ func _unhandled_input(_event):
 	if Input.is_action_just_pressed("change_weapon"):
 		weapons.push_back(weapons.pop_front())
 		update_weapon()
+	if Input.is_action_just_pressed("reload"):
+		$CanvasLayer/Control/Ammo.reload()
 				
 func update_weapon() -> void:
+	$CanvasLayer/Control/Ammo.hide()
+	$CanvasLayer/Control/Melee.hide()
 	match weapons[0]:
 		0:
 			$Sprite.texture = none
 		1: 
 			$Sprite.texture = fork
+			$CanvasLayer/Control/Melee.show()
 		2: 
 			$Sprite.texture = s12
+			$CanvasLayer/Control/Ammo.show()
+
+func set_canvas(var value : bool) -> void:
+	if value:
+		$CanvasLayer/Control.show()
+	else:
+		$CanvasLayer/Control.hide()
 		
 func update_anim_tree(vector : Vector2) -> void:
 	$AnimationTree.set("parameters/Idle/blend_position", vector)
@@ -74,16 +86,20 @@ func attack() -> void:
 	
 	update_anim_tree(input_vector.normalized())
 	
-	set_physics_process(false)
-	set_process_unhandled_input(false)
 	
 	if weapons[0] == 1:
 		travel_anim("Attack")
+		set_physics_process(false)
+		set_process_unhandled_input(false)
 	else:
-		travel_anim("Shoot")
+		if $CanvasLayer/Control/Ammo.have_ammo():
+			travel_anim("Shoot")
+			set_physics_process(false)
+			set_process_unhandled_input(false)
 		
 func shoot() -> void:
 	if weapons[0] == 2:
+		$CanvasLayer/Control/Ammo.remove_shell()
 		$Range/Particles2D.emitting = true
 		spaw_b(100)
 		spaw_b(50)
@@ -97,6 +113,9 @@ func spaw_b( value : int = 0) -> void:
 	bullet_inst.rotation_degrees = $Range.rotation_degrees 
 	bullet_inst.apply_impulse(Vector2(), Vector2(300, 0).rotated($Range.rotation + value))
 	get_parent().add_child(bullet_inst)
+	
+func get_ammo(var value : int) -> void:
+	$CanvasLayer/Control/Ammo.add(value)
 		
 func for_idle() -> void:
 	travel_anim("Idle")
@@ -109,11 +128,12 @@ func add_item(value : String) -> void:
 		"fork":
 			weapons.push_front(1)
 			update_weapon()
-			$CanvasLayer/Ballon.ballon_text("Vem pro pai!")
+			$CanvasLayer/Control/Ballon.ballon_text("Vem pro pai!")
 		"s12":
 			weapons.push_front(2)
+			get_ammo(10)
 			update_weapon()
-			$CanvasLayer/Ballon.ballon_text("Agora sim!")
+			$CanvasLayer/Control/Ballon.ballon_text("Agora sim!")
 
 func player(value : bool) -> void:
 	set_physics_process(value)
