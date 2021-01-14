@@ -5,7 +5,7 @@
 </h1>
 
 <h1 align = "center">
-    <img src="https://ik.imagekit.io/Rohr/base1_ZG6Ju1-wF.gif">
+    <img src="Logo/base1.gif">
 </h1>
 
 # 📜Sobre
