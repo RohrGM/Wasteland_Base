@@ -9,7 +9,7 @@
 </h1>
 
 # 📜Sobre
-O **Base** é um projeto pessoal a fim de desenvolver um game em pixel art de **sobrevivência**, com foco na defesa da sua casa, o jogador se encontra nas wasteland, um mundo já destruído a mais de um século em que o jogador sempre que o sol se pôr terá de enfrentar uma **horda de inimigos** da melhor forma que se preparou durante o dia. 
+O **Base** é um projeto pessoal a fim de desenvolver um game em pixel art de **sobrevivência**, com foco na defesa da sua casa o jogador se encontra na wasteland, um mundo já destruído a mais de um século em que o jogador, sempre que o sol se pôr terá de enfrentar uma **horda de inimigos** da melhor forma que se preparou durante o dia. 
 
 ---
 
