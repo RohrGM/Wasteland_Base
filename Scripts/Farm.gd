@@ -6,7 +6,7 @@ onready var none = preload("res://Farm/farm.png")
 onready var bullet : PackedScene = preload("res://PackedScene/Bullet.tscn")
 
 const ACCELERATION : int = 550
-const MAX_SPEED : int = 50
+const MAX_SPEED : int = 40
 const FRICTION : int = 20000
 
 var velocity : Vector2 = Vector2.ZERO
@@ -128,12 +128,11 @@ func add_item(value : String) -> void:
 		"fork":
 			weapons.push_front(1)
 			update_weapon()
-			$CanvasLayer/Control/Ballon.ballon_text("Vem pro pai!")
+			
 		"s12":
 			weapons.push_front(2)
 			get_ammo(10)
 			update_weapon()
-			$CanvasLayer/Control/Ballon.ballon_text("Agora sim!")
 
 func player(value : bool) -> void:
 	set_physics_process(value)

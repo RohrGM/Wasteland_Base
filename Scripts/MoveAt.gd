@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var nav : Navigation2D = get_parent().get_parent().get_parent()
+onready var nav : Navigation2D = get_tree().get_root().get_node("World")
 var speed : int = 30
 
 var end_pos = Vector2()
@@ -18,10 +18,10 @@ func _physics_process(delta : float) -> void:
 		emit_signal("in_position")
 		set_physics_process(false)
 	
-func start(pos: Vector2, speed_move : int = 30) -> void:
+func start(pos: Vector2, speed_move : int = 30, type : String = "Run") -> void:
 	speed = speed_move
 	end_pos = pos
-	get_parent().travel_anim("Run")
+	get_parent().travel_anim(type)
 	_update_navigation_path()
 	set_physics_process(true)
 	

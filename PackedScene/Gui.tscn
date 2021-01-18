@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://Farm/dialogue_bk.png" type="Texture" id=2]
 [ext_resource path="res://Farm/farm_face1.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/TimeControl.gd" type="Script" id=4]
 
 [node name="Gui" type="CanvasLayer"]
 
 [node name="Dialogue" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0.705882 )
 margin_top = 158.0
 margin_right = 380.0
@@ -60,6 +62,7 @@ __meta__ = {
 }
 
 [node name="Objective" type="Label" parent="."]
+visible = false
 margin_left = 6.0
 margin_top = 7.0
 margin_right = 121.0
@@ -68,3 +71,33 @@ rect_scale = Vector2( 0.4, 0.4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TimeControl" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="TimeControl"]
+wait_time = 0.1
+autostart = true
+
+[node name="Day" type="Label" parent="TimeControl"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 0.5, 0.5 )
+text = "Dia 0"
+
+[node name="Clock" type="Label" parent="TimeControl"]
+margin_left = 0.379967
+margin_top = 7.37947
+margin_right = 40.38
+margin_bottom = 21.3795
+rect_scale = Vector2( 0.5, 0.5 )
+text = "05:01"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="TimeControl/Timer" to="TimeControl" method="_on_Timer_timeout"]
