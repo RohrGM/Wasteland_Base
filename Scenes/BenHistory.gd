@@ -6,6 +6,7 @@ onready var msg : PackedScene = preload("res://PackedScene/WordMessage.tscn")
 onready var tls : PackedScene = preload("res://PackedScene/ToolsAnim.tscn")
 onready var vgt : PackedScene = preload("res://PackedScene/Vagrant.tscn")
 
+var slugs : int = 0
 
 enum{
 	AXE,
@@ -62,10 +63,10 @@ func spawTools(var type : int, var pos : Vector2) -> void:
 	tools.position = pos
 
 func slug_dead() -> void:
-	$Timer.wait_time = 1.5
-	$Timer.start()
-	yield($Timer, "timeout")
-	if $YSort/YSort.get_children().size() == 0:
+	
+	slugs += 1
+		
+	if slugs == 11:
 		$YSort/YSort.queue_free()
 		$YSort/Fireplace/AnimationPlayer.current_animation = "fire"
 		$YSort/Fireplace/Particles2D.emitting = true

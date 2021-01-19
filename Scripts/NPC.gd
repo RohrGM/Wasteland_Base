@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var pt : PackedScene = preload("res://PackedScene/Point.tscn")
-
+onready var fm : PackedScene = preload("res://PackedScene/farmNPC.tscn")
 
 var home_pos : Vector2 = Vector2.ZERO
 var mv : Node2D = null
@@ -13,7 +13,20 @@ func _ready() -> void:
 	home_pos = Vector2(-6, -10)
 	set_physics_process(false)
 	travel_anim("Idle")
+	var tools = get_tree().get_nodes_in_group("Tools")
+	for i in tools:
+		i.connect("new_tool", self, "go_tool")
 	
+func go_tool(pos : Vector2) -> void:
+	$Timer.stop()
+	move_at(pos)
+	
+func up_tool() -> void:
+	stop_move()
+	var farm : KinematicBody2D = fm.instance()
+	get_parent().call_deferred("add_child", farm)
+	farm.position = position
+	queue_free()
 		
 func set_home(pos : Vector2) -> void:
 	home_pos = pos
@@ -50,7 +63,7 @@ func move_at(pos : Vector2) -> void:
 	stop_move()
 	mv = m.instance()
 	add_child(mv)
-	mv.start(pos, 20, "Run")
+	mv.start(pos, 30, "Run")
 	mv.connect("in_position", self, "_on_MoveAt_in_position")
 	
 func stop_move() -> void:
