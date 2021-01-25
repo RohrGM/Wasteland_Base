@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Animals/rabbit_anim.png" type="Texture" id=1]
+[ext_resource path="res://PackedScene/Prey.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "dead"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.50329 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 8 ), Vector2( 1, 8 ), Vector2( 2, 8 ), Vector2( 3, 8 ), Vector2( 4, 8 ), Vector2( 5, 8 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 2.07278
+
+[node name="RabbitDead" type="Area2D" groups=[
+"Prey",
+]]
+position = Vector2( 0, -6 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 9
+hframes = 6
+frame = 48
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." groups=[
+"Food",
+]]
+root_node = NodePath("../Sprite")
+autoplay = "dead"
+anims/dead = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.280617, 5.75262 )
+shape = SubResource( 2 )

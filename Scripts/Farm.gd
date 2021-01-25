@@ -4,6 +4,8 @@ onready var fork = preload("res://Farm/farm_fork.png")
 onready var s12 = preload("res://Farm/farm_12.png")
 onready var none = preload("res://Farm/farm.png")
 onready var bullet : PackedScene = preload("res://PackedScene/Bullet.tscn")
+onready var fd : PackedScene = preload("res://PackedScene/Food.tscn")
+
 
 const ACCELERATION : int = 550
 const MAX_SPEED : int = 40
@@ -46,6 +48,8 @@ func _unhandled_input(_event):
 		update_weapon()
 	if Input.is_action_just_pressed("reload"):
 		$CanvasLayer/Control/Ammo.reload()
+	if Input.is_action_just_pressed("drop_food"):
+		drop_food()
 				
 func update_weapon() -> void:
 	$CanvasLayer/Control/Ammo.hide()
@@ -74,6 +78,11 @@ func update_anim_tree(vector : Vector2) -> void:
 
 func travel_anim(anim : String) -> void:
 	$AnimationTree.get("parameters/playback").travel(anim)
+	
+func drop_food() -> void:
+	var food : Sprite = fd.instance()
+	get_parent().call_deferred("add_child", food)
+	food.position = position
 	
 func attack_hit() -> void:
 	if enemys.size() > 0:

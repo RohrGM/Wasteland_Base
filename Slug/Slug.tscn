@@ -380,7 +380,9 @@ radius = 10.6247
 [sub_resource type="CircleShape2D" id=37]
 radius = 53.0024
 
-[node name="Slug" type="KinematicBody2D"]
+[node name="Slug" type="KinematicBody2D" groups=[
+"Enemy",
+]]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource( 2 )
@@ -389,7 +391,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 14
 hframes = 4
-frame = 9
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_behind = SubResource( 1 )

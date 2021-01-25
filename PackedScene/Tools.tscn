@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/tools_axe.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 17.1318
-height = 33.9816
+radius = 12.9999
+height = 37.7364
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 5.0

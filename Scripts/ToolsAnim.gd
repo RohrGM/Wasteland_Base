@@ -1,6 +1,6 @@
 extends Sprite
 
-onready var ax : PackedScene = preload("res://PackedScene/ToolsAxe.tscn")
+onready var ax : PackedScene = preload("res://PackedScene/Tools.tscn")
 
 var type : int 
 

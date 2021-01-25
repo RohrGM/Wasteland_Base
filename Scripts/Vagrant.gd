@@ -11,7 +11,6 @@ var alive : bool = true
 
 func _ready() -> void:
 	home_pos = Vector2(-6, -10)
-	set_process_unhandled_input(false)
 	set_physics_process(false)
 	travel_anim("Idle")
 	
@@ -46,15 +45,11 @@ func new_action() -> void:
 		$Timer.wait_time = rand_range(5, 20)
 		$Timer.start()
 		
-func _unhandled_input(event):
-	if Input.is_action_just_pressed("interact"):
-		npc_spaw()
-		
-func move_at(pos : Vector2) -> void:
+func move_at(pos : Vector2, speed : int = 12, anim : String = "Walk") -> void:
 	stop_move()
 	mv = m.instance()
 	add_child(mv)
-	mv.start(pos, 12, "Walk")
+	mv.start(pos, speed, anim)
 	mv.connect("in_position", self, "_on_MoveAt_in_position")
 	
 func stop_move() -> void:
@@ -107,11 +102,17 @@ func _on_MoveAt_in_position() -> void:
 	travel_anim("Idle")
 	$Timer.wait_time = rand_range(1, 5)
 	$Timer.start()
+	
+func view_food(pos : Vector2) -> void:
+	move_at(pos, 30, "Run")
 		
 func _on_View_body_entered(body) -> void:
-	if body.is_in_group("Player"):
-		set_process_unhandled_input(true)
+	pass
 
 func _on_View_body_exited(body) -> void:
-	if body.is_in_group("Player"):
-		set_process_unhandled_input(false)
+	pass
+
+func _on_TakeFood_area_entered(area):
+	if area.name == "Food_area":
+		area.get_parent().queue_free()
+		npc_spaw()

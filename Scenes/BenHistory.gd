@@ -10,7 +10,8 @@ var slugs : int = 0
 
 enum{
 	AXE,
-	FORK
+	FORK,
+	RIFLE
 }
 
 func _ready() -> void:
@@ -20,8 +21,8 @@ func _ready() -> void:
 	for i in $InteractAreas.get_children():
 		i.connect("action", self, "action_event")
 		
-	for i in $YSort/YSort.get_children():
-		i.connect("death", self, "slug_dead")
+#	for i in $YSort/YSort.get_children():
+#		i.connect("death", self, "slug_dead")
 		
 func VagrantSp() -> void:
 	randomize()
@@ -33,7 +34,7 @@ func VagrantSp() -> void:
 func horde_from_hell() -> void:
 	randomize()
 	var spPos : Vector2 = $Spaws/Horde.get_child(randi()%3).position
-	
+
 	for i in range(int($Gui/TimeControl.get_day() * 3 )):
 		var monster : KinematicBody2D = slug.instance()
 		$YSort.call_deferred("add_child", monster)
@@ -61,13 +62,9 @@ func spawTools(var type : int, var pos : Vector2) -> void:
 	$YSort.add_child(tools)
 	tools.type = type
 	tools.position = pos
-
-func slug_dead() -> void:
 	
-	slugs += 1
-		
-	if slugs == 11:
-		$YSort/YSort.queue_free()
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("Player"):
 		$YSort/Fireplace/AnimationPlayer.current_animation = "fire"
 		$YSort/Fireplace/Particles2D.emitting = true
 		$Timer.wait_time = 2
@@ -77,9 +74,27 @@ func slug_dead() -> void:
 		$Timer.start()
 		yield($Timer, "timeout")
 		spawTools(AXE, Vector2(-144, -12))
-		spawTools(FORK, Vector2(113, -12))
-		VagrantSp()
-		VagrantSp()
+		spawTools(RIFLE, Vector2(113, -12))
+		$Area2D.queue_free()
+
+func slug_dead() -> void:
+	pass
+#	slugs += 1
+#
+#	if slugs == 11:
+#		$YSort/YSort.queue_free()
+#		$YSort/Fireplace/AnimationPlayer.current_animation = "fire"
+#		$YSort/Fireplace/Particles2D.emitting = true
+#		$Timer.wait_time = 2
+#		$Timer.start()
+#		yield($Timer, "timeout")
+#		message("Eles virão até o fogo", $YSort/Fireplace.position)
+#		$Timer.start()
+#		yield($Timer, "timeout")
+#		spawTools(AXE, Vector2(-144, -12))
+#		spawTools(RIFLE, Vector2(113, -12))
+#		VagrantSp()
+#		VagrantSp()
 
 
 
@@ -218,3 +233,5 @@ func slug_dead() -> void:
 #
 #
 #
+
+

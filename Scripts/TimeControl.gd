@@ -16,6 +16,9 @@ func update() -> void:
 
 func get_day() -> int:
 	return day
+	
+func get_hour() -> int:
+	return hour
 
 func _on_Timer_timeout() -> void:
 	minute += 1

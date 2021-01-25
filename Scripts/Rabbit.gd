@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var pt : PackedScene = preload("res://PackedScene/Point.tscn")
+onready var rd : PackedScene = preload("res://PackedScene/RabbitDead.tscn")
 
 var home_pos : Vector2 = Vector2.ZERO
 var mv : Node2D = null
@@ -9,23 +10,9 @@ var target_pos : Vector2 = Vector2.ZERO
 var alive : bool = true
 
 func _ready() -> void:
-	home_pos = Vector2(-6, -10)
+	home_pos = position
 	set_physics_process(false)
 	travel_anim("Idle")
-	
-func go_tool(pos : Vector2) -> void:
-	$Timer.stop()
-	move_at(pos)
-	
-func up_tool(new : PackedScene) -> void:
-	stop_move()
-	var npc : KinematicBody2D = new.instance()
-	get_parent().call_deferred("add_child", npc)
-	npc.position = position
-	queue_free()
-		
-func set_home(pos : Vector2) -> void:
-	home_pos = pos
 	
 func travel_anim(anim : String) -> void:
 	$AnimationTree.get("parameters/playback").travel(anim)
@@ -35,8 +22,7 @@ func update_anim_tree(vector : Vector2) -> void:
 	$AnimationTree.set("parameters/Run/blend_position", vector)
 	$AnimationTree.set("parameters/Walk/blend_position", vector)
 
-func new_action() -> void:
-	
+func new_action() -> void:	
 	randomize()
 	var sort_ac : int = randi()%4
 	if sort_ac == 1:
@@ -55,11 +41,11 @@ func new_action() -> void:
 		$Timer.wait_time = rand_range(5, 20)
 		$Timer.start()
 		
-func move_at(pos : Vector2) -> void:
+func move_at(pos : Vector2, speed : int = 12, anim : String = "Walk") -> void:
 	stop_move()
 	mv = m.instance()
 	add_child(mv)
-	mv.start(pos, 30, "Run")
+	mv.start(pos, speed, anim)
 	mv.connect("in_position", self, "_on_MoveAt_in_position")
 	
 func stop_move() -> void:
@@ -95,8 +81,10 @@ func take_damage(_value : int = 1) -> void:
 	pass
 	
 func dead() -> void:
-	pass
-	
+	var rabbit : Area2D = rd.instance()
+	get_parent().call_deferred("add_child", rabbit)
+	rabbit.position = position
+	queue_free()
 
 func _on_Timer_timeout() -> void:
 	new_action()
@@ -107,8 +95,8 @@ func _on_MoveAt_in_position() -> void:
 	$Timer.start()
 		
 func _on_View_body_entered(body) -> void:
-	pass
+	if body.is_in_group("Player") or body.is_in_group("NPC"):
+		move_at(run_away(body.position), 40, "Run")
 
 func _on_View_body_exited(body) -> void:
 	pass
- 

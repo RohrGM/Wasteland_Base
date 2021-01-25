@@ -2,13 +2,16 @@ extends Area2D
 
 enum{
 	AXE,
-	FORK
+	FORK,
+	RIFLE
 }
 
-var type : int
-var tools : int = 0
+onready var fm : PackedScene = preload("res://PackedScene/farmNPC.tscn")
+onready var rm : PackedScene = preload("res://PackedScene/RifleMan.tscn")
 
-signal new_tool(value)
+var tools : int = 0
+var type : int
+var npcs : Array = []
 
 func _ready() -> void:
 	set_process_unhandled_input(false)
@@ -18,11 +21,14 @@ func _unhandled_input(event):
 		interact()
 		
 func set_type(var ty : int) -> void:
-	match(ty):
+	type = ty
+	match(type):
 		AXE:
 			$Sprite.texture = load("res://Assets/tools_axe.png")
 		FORK:
 			$Sprite.texture = load("res://Assets/tools_fork.png")
+		RIFLE:
+			$Sprite.texture = load("res://Assets/tools_rifle.png")
 
 func set_anim(var value : int) -> void:
 	$Sprite.frame = tools
@@ -41,21 +47,42 @@ func interact() -> void:
 	if tools < 6:
 		tools += 1
 		set_anim(tools)
-		emit_signal("new_tool", position)
 		$Timer.start()
+		check_no_tool()
+		
+		if npcs.size() > 0:
+			up_npc(npcs[0])
+			
+func check_no_tool() -> void:
+	var npc_no_tool = get_tree().get_nodes_in_group("No_tool")
+	if npc_no_tool.size() > 0:
+		for i in npc_no_tool:
+			i.go_tool(position)
+
+func up_npc(npc) -> void:
+	remove_tools()
+	match(type):
+		AXE:
+			npc.up_tool(fm)
+		FORK:
+			npc.up_tool(fm)
+		RIFLE:
+			npc.up_tool(rm)
 
 func _on_ToolsAxe_body_entered(body) -> void:
 	if body.is_in_group("Player"):
 		set_process_unhandled_input(true)
 		
-	if body.is_in_group("NPC"):
-		remove_tools()
-		body.up_tool()
+	if body.is_in_group("No_tool"):
+		npcs.append(body)
+		if get_tools() > 0:
+			up_npc(body)
 
 func _on_ToolsAxe_body_exited(body) -> void:
 	if body.is_in_group("Player"):
 		set_process_unhandled_input(false)
-
+	if body.is_in_group("No_tool"):
+			npcs.erase(body)
 
 func _on_Timer_timeout():
-	emit_signal("new_tool", position)
+	check_no_tool()
