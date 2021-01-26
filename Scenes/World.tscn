@@ -188,12 +188,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="NavigationPolygon" id=7]
+[sub_resource type="NavigationPolygon" id=6]
 vertices = PoolVector2Array( 20, 25, 21, 17, 614, -314, 681.251, -14.3771, 695.934, 119.107, 508, 556, 16, -490, 5, 13, -653, -410, -10, 15, -688, -68, -637, 403, -11, 25, -265, 575, 5, 29 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 2, 1, 7, 8 ), PoolIntArray( 8, 7, 9, 10 ), PoolIntArray( 11, 10, 9, 12, 13 ), PoolIntArray( 5, 13, 12, 14 ), PoolIntArray( 5, 14, 0 ) ]
 outlines = [ PoolVector2Array( 614, -314, 16, -490, -653, -410, -688, -68, -637, 403, -265, 575, 508, 556, 695.934, 119.107, 681.251, -14.3771 ), PoolVector2Array( -11, 25, 5, 29, 20, 25, 21, 17, 5, 13, -10, 15 ) ]
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=7]
 radius = 103.078
 
 [node name="World" type="Navigation2D"]
@@ -314,7 +314,7 @@ position = Vector2( 394, -245 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
 visible = false
-navpoly = SubResource( 7 )
+navpoly = SubResource( 6 )
 
 [node name="Gui" parent="." instance=ExtResource( 9 )]
 
@@ -335,5 +335,5 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 4, 16 )
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var pt : PackedScene = preload("res://PackedScene/Point.tscn")
+onready var fd : PackedScene = preload("res://PackedScene/Food.tscn")
 
 
 var home_pos : Vector2 = Vector2.ZERO
@@ -10,6 +11,7 @@ var alive : bool = true
 var enemys : Array = []
 var preys : Array = []
 var food : int = 0
+var in_player : bool = false
 var current_targuet : KinematicBody2D = null
 
 func _ready() -> void:
@@ -37,24 +39,32 @@ func update_anim_tree(vector : Vector2) -> void:
 	$AnimationTree.set("parameters/Aim/blend_position", vector)
 	$AnimationTree.set("parameters/Shot/blend_position", vector)
 
-func new_action() -> void:
-	randomize()
-	var sort_ac : int = randi()%3
-	if sort_ac == 1:
-		
-		var new_pos : Vector2 = sort_pos(position)
-		if position.distance_to(home_pos) > 90:
-			new_pos = sort_pos(home_pos)
-		else:
-			while new_pos.distance_to(home_pos) > 100:
-				new_pos = sort_pos(position)
-				
-		move_at(new_pos)
+func new_action(var move : bool = false) -> void:
+	var sort_ac : int = 1
 	
+	if !move:
+		randomize()
+		sort_ac = randi()%3
+	
+	if preys.size() == 0:
+		
+		if sort_ac == 1:
+			
+			var new_pos : Vector2 = sort_pos(position)
+			if position.distance_to(home_pos) > 90:
+				new_pos = sort_pos(home_pos)
+			else:
+				while new_pos.distance_to(home_pos) > 100:
+					new_pos = sort_pos(position)
+					
+			move_at(new_pos)
+		
+		else:
+			update_anim_tree(sort_direction())
+			$Timer.wait_time = rand_range(5, 20)
+			$Timer.start()
 	else:
-		update_anim_tree(sort_direction())
-		$Timer.wait_time = rand_range(5, 20)
-		$Timer.start()
+		go_to_prey()
 		
 func move_at(pos : Vector2) -> void:
 	stop_move()
@@ -65,6 +75,7 @@ func move_at(pos : Vector2) -> void:
 	
 func stop_move() -> void:
 	if mv != null:
+		travel_anim("Idle")
 		mv.queue_free()
 
 func sort_direction() -> Vector2:
@@ -120,6 +131,7 @@ func defend() -> void:
 
 
 func engage(var targuet: KinematicBody2D) -> void:
+	$Timer.stop()
 	current_targuet = targuet
 	if current_targuet != null:
 		var direction : Vector2 = Vector2.ZERO
@@ -155,6 +167,18 @@ func enemy_closer() -> KinematicBody2D:
 			distance = position.distance_to(i.position)
 			targuet = i
 	return targuet
+
+func drop_food(var value : int) -> void:
+	for i in range(value):
+		var food : RigidBody2D = fd.instance()
+		get_parent().call_deferred("add_child", food)
+		food.position = position + Vector2(0, -20)
+		$Food.start()
+		
+		yield($Food, "timeout")
+	
+	new_action(true)
+		
 
 func _on_Timer_timeout() -> void:
 	new_action()
@@ -195,3 +219,22 @@ func _on_TakeFood_area_entered(area):
 				go_to_prey()
 			else:
 				new_action()
+
+
+func _on_TakeFood_body_entered(body):
+	if body.is_in_group("Player"):
+		in_player = true
+		stop_move()
+		$InPlayer.wait_time = 1
+		$InPlayer.start()
+
+func _on_TakeFood_body_exited(body):
+	if body.is_in_group("Player"):
+		in_player = true
+
+func _on_InPlayer_timeout():
+	if in_player:
+		drop_food(food)
+		food = 0
+	else:
+		new_action(true)

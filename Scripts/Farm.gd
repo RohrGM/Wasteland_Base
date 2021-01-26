@@ -80,9 +80,11 @@ func travel_anim(anim : String) -> void:
 	$AnimationTree.get("parameters/playback").travel(anim)
 	
 func drop_food() -> void:
-	var food : Sprite = fd.instance()
-	get_parent().call_deferred("add_child", food)
-	food.position = position
+	if get_parent().get_parent().remove_food(1):
+		var food : RigidBody2D = fd.instance()
+		get_parent().call_deferred("add_child", food)
+		food.position = position + Vector2(0, -20)
+	
 	
 func attack_hit() -> void:
 	if enemys.size() > 0:
@@ -158,3 +160,8 @@ func _on_RangeMelee_area_entered(area):
 func _on_RangeMelee_area_exited(area):
 	if area.get_parent() in enemys:
 		enemys.erase(area.get_parent())
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("Food"):
+		get_parent().get_parent().add_food(1)
+		area.get_parent().queue_free()

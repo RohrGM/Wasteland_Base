@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var st : PackedScene = preload("res://PackedScene/Stone.tscn")
-onready var pt : PackedScene = preload("res://Point.tscn")
+onready var pt : PackedScene = preload("res://PackedScene/Point.tscn")
 
 var home_pos : Vector2 = Vector2.ZERO
 var enemys : Array = []

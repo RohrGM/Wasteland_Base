@@ -7,6 +7,7 @@ onready var tls : PackedScene = preload("res://PackedScene/ToolsAnim.tscn")
 onready var vgt : PackedScene = preload("res://PackedScene/Vagrant.tscn")
 
 var slugs : int = 0
+var food : int = 2
 
 enum{
 	AXE,
@@ -18,11 +19,29 @@ func _ready() -> void:
 	$Gui/TimeControl.connect("horde", self, "horde_from_hell")
 	$Gui/TimeControl.connect("new_day", self, "new_day")
 	
+	update_food()
+	
 	for i in $InteractAreas.get_children():
 		i.connect("action", self, "action_event")
 		
 #	for i in $YSort/YSort.get_children():
 #		i.connect("death", self, "slug_dead")
+
+func remove_food(var value : int) -> bool:
+	if food - value >= 0:
+		food -= value
+		update_food()
+		return true
+		
+	update_food()
+	return false
+	
+func add_food(var value : int) -> void:
+	food += value
+	update_food()
+
+func update_food() -> void:
+	$Gui/Resources/Food.text = String(food)
 		
 func VagrantSp() -> void:
 	randomize()
@@ -35,7 +54,7 @@ func horde_from_hell() -> void:
 	randomize()
 	var spPos : Vector2 = $Spaws/Horde.get_child(randi()%3).position
 
-	for i in range(int($Gui/TimeControl.get_day() * 3 )):
+	for i in range(int($Gui/TimeControl.get_day() * 5 )):
 		var monster : KinematicBody2D = slug.instance()
 		$YSort.call_deferred("add_child", monster)
 		monster.position = spPos + Vector2(rand_range(-10, 10), rand_range(-10 , 10))

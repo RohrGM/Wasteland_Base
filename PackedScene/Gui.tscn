@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://Farm/dialogue_bk.png" type="Texture" id=2]
 [ext_resource path="res://Farm/farm_face1.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/TimeControl.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Food.png" type="Texture" id=5]
 
 [node name="Gui" type="CanvasLayer"]
 
@@ -97,6 +98,31 @@ margin_right = 40.38
 margin_bottom = 21.3795
 rect_scale = Vector2( 0.5, 0.5 )
 text = "05:01"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resources" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Resources"]
+margin_left = 299.065
+margin_top = 2.07636
+margin_right = 339.065
+margin_bottom = 42.0764
+texture = ExtResource( 5 )
+
+[node name="Food" type="Label" parent="Resources"]
+margin_left = 292.171
+margin_top = 7.02611
+margin_right = 332.171
+margin_bottom = 21.0261
+rect_scale = Vector2( 0.5, 0.5 )
+text = "01"
 __meta__ = {
 "_edit_use_anchors_": false
 }
