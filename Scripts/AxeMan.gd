@@ -160,6 +160,11 @@ func tree_down() -> void:
 	
 func go_to_tree() -> void:
 	current_tree = closer_tree(trees)
+	current_tree.set_free(false)
+	var axe_man : Array = get_tree().get_nodes_in_group("Axe_man")
+	for i in axe_man:
+		if current_tree in i.trees:
+			i.trees.erase(current_tree)
 	farm_wood()
 	
 func closer_tree(var list : Array) -> Area2D:

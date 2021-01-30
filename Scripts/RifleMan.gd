@@ -147,7 +147,7 @@ func more_enemys() -> void:
 	elif preys.size() > 0:
 		go_to_prey()
 	else:
-		new_action()
+		new_action(true)
 		
 func shot() -> void:
 	if current_targuet != null and current_targuet.alive:
