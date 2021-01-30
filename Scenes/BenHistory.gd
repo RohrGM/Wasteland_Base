@@ -92,8 +92,8 @@ func _on_Area2D_body_entered(body):
 		message("Eles virão até o fogo", $YSort/Fireplace.position)
 		$Timer.start()
 		yield($Timer, "timeout")
-		spawTools(AXE, Vector2(-144, -12))
-		spawTools(RIFLE, Vector2(113, -12))
+		spawTools(AXE, Vector2(-87, -11))
+		spawTools(RIFLE, Vector2(90, -12))
 		$Area2D.queue_free()
 
 func slug_dead() -> void:

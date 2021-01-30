@@ -8,6 +8,7 @@ enum{
 
 onready var fm : PackedScene = preload("res://PackedScene/farmNPC.tscn")
 onready var rm : PackedScene = preload("res://PackedScene/RifleMan.tscn")
+onready var ax : PackedScene = preload("res://PackedScene/AxeMan.tscn")
 
 var tools : int = 0
 var type : int
@@ -63,7 +64,7 @@ func up_npc(npc) -> void:
 	remove_tools()
 	match(type):
 		AXE:
-			npc.up_tool(fm)
+			npc.up_tool(ax)
 		FORK:
 			npc.up_tool(fm)
 		RIFLE:

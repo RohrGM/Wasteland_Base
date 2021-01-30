@@ -13,14 +13,14 @@ radius = 10.6247
 [sub_resource type="CircleShape2D" id=3]
 radius = 92.3974
 
-[sub_resource type="Gradient" id=21]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.995633, 1 )
 colors = PoolColorArray( 0.74902, 0.74902, 0.74902, 0.109804, 0.458824, 0.458824, 0.458824, 0, 0.704025, 0.704025, 0.704025, 0.842105 )
 
-[sub_resource type="GradientTexture" id=22]
-gradient = SubResource( 21 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=23]
+[sub_resource type="ParticlesMaterial" id=6]
 lifetime_randomness = 1.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
@@ -33,10 +33,9 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 100.0
 damping_random = 1.0
-color_ramp = SubResource( 22 )
+color_ramp = SubResource( 5 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "aim_behind"
+[sub_resource type="Animation" id=7]
 length = 1.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -49,55 +48,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Vector2( 0, 11 ), Vector2( 1, 11 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "aim_forward"
-length = 1.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, 10 ), Vector2( 1, 10 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "aim_left"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, 9 ), Vector2( 1, 9 ) ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "aim_right"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 0, 8 ), Vector2( 1, 8 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -113,12 +63,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 3 ), Vector2( 1, 3 ) ]
+"values": [ Vector2( 0, 10 ), Vector2( 1, 10 ) ]
 }
 
 [sub_resource type="Animation" id=9]
 length = 1.4
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -129,12 +78,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 2 ), Vector2( 1, 2 ) ]
+"values": [ Vector2( 0, 9 ), Vector2( 1, 9 ) ]
 }
 
 [sub_resource type="Animation" id=10]
 length = 1.4
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
 tracks/0/interp = 1
@@ -145,7 +93,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 1 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 0, 8 ), Vector2( 1, 8 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -161,11 +109,58 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ) ]
+"values": [ Vector2( 0, 3 ), Vector2( 1, 3 ) ]
 }
 
 [sub_resource type="Animation" id=12]
-resource_name = "more_enemys"
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 2 ), Vector2( 1, 2 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
 length = 0.001
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -182,8 +177,7 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "shot_behind"
+[sub_resource type="Animation" id=16]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -248,8 +242,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "shot_forward"
+[sub_resource type="Animation" id=17]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -314,8 +307,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "shot_left"
+[sub_resource type="Animation" id=18]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -380,7 +372,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=19]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame_coords")
@@ -445,7 +437,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=20]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -461,7 +453,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 7 ), Vector2( 1, 7 ), Vector2( 2, 7 ), Vector2( 3, 7 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=21]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -477,7 +469,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 6 ), Vector2( 1, 6 ), Vector2( 2, 6 ), Vector2( 3, 6 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=22]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -493,7 +485,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 5 ), Vector2( 1, 5 ), Vector2( 2, 5 ), Vector2( 3, 5 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=23]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -659,6 +651,7 @@ position = Vector2( 0, -13 )
 texture = ExtResource( 2 )
 vframes = 18
 hframes = 4
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -690,26 +683,26 @@ amount = 50
 one_shot = true
 explosiveness = 0.8
 local_coords = false
-process_material = SubResource( 23 )
+process_material = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/aim_behind = SubResource( 4 )
-anims/aim_forward = SubResource( 5 )
-anims/aim_left = SubResource( 6 )
-anims/aim_right = SubResource( 7 )
-anims/idle_behind = SubResource( 8 )
-anims/idle_forward = SubResource( 9 )
-anims/idle_left = SubResource( 10 )
-anims/idle_right = SubResource( 11 )
-anims/more_enemys = SubResource( 12 )
-anims/shot_behind = SubResource( 13 )
-anims/shot_forward = SubResource( 14 )
-anims/shot_left = SubResource( 15 )
-anims/shot_right = SubResource( 16 )
-anims/walk_behind = SubResource( 17 )
-anims/walk_forward = SubResource( 18 )
-anims/walk_left = SubResource( 19 )
-anims/walk_right = SubResource( 20 )
+anims/aim_behind = SubResource( 7 )
+anims/aim_forward = SubResource( 8 )
+anims/aim_left = SubResource( 9 )
+anims/aim_right = SubResource( 10 )
+anims/idle_behind = SubResource( 11 )
+anims/idle_forward = SubResource( 12 )
+anims/idle_left = SubResource( 13 )
+anims/idle_right = SubResource( 14 )
+anims/more_enemys = SubResource( 15 )
+anims/shot_behind = SubResource( 16 )
+anims/shot_forward = SubResource( 17 )
+anims/shot_left = SubResource( 18 )
+anims/shot_right = SubResource( 19 )
+anims/walk_behind = SubResource( 20 )
+anims/walk_forward = SubResource( 21 )
+anims/walk_left = SubResource( 22 )
+anims/walk_right = SubResource( 23 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 51 )
