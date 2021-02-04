@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var m : PackedScene = preload("res://PackedScene/MoveAt.tscn")
 onready var pt : PackedScene = preload("res://PackedScene/Point.tscn")
-onready var fd : PackedScene = preload("res://PackedScene/Food.tscn")
+onready var lg : PackedScene = preload("res://PackedScene/Log.tscn")
 
 
 var home_pos : Vector2 = Vector2.ZERO
@@ -75,7 +75,8 @@ func move_at(pos : Vector2) -> void:
 	mv.connect("in_position", self, "_on_MoveAt_in_position")
 	
 func hit_tree():
-	current_tree.hit(self)
+	if current_tree != null:
+		current_tree.hit(self)
 	
 func stop_move() -> void:
 	if mv != null:
@@ -121,14 +122,16 @@ func farm() -> void:
 func home() -> void:
 	home_pos = get_node("../Fireplace").position
 	move_at(sort_pos(home_pos))
-	current_tree.set_free(true)
+	
+	if current_tree != null:
+		current_tree.set_free(true)
 	farming = false
 	current_tree = null
 	trees = []
 	
 func drop_wood(var value : int) -> void:
 	for i in range(value):
-		var wood : RigidBody2D = fd.instance()
+		var wood : RigidBody2D = lg.instance()
 		get_parent().call_deferred("add_child", wood)
 		wood.position = position + Vector2(0, -20)
 		$Wood.start()
@@ -206,20 +209,6 @@ func _on_View_area_entered(area):
 		trees.append(area)
 		if current_tree == null:
 			go_to_tree()
-		
-func _on_TakeFood_area_entered(area):
-	pass
-
-func _on_TakeFood_body_entered(body):
-	if body.is_in_group("Player"):
-		in_player = true
-		stop_move()
-		$InPlayer.wait_time = 1
-		$InPlayer.start()
-
-func _on_TakeFood_body_exited(body):
-	if body.is_in_group("Player"):
-		in_player = true
 
 func _on_InPlayer_timeout():
 	if in_player:
@@ -228,5 +217,15 @@ func _on_InPlayer_timeout():
 	else:
 		new_action(true)
 
-func _on_TakeWood_area_entered(area):
-	pass
+
+func _on_TakeWood_body_entered(body):
+	if body.is_in_group("Player"):
+		in_player = true
+		stop_move()
+		$InPlayer.wait_time = 1
+		$InPlayer.start()
+
+func _on_TakeWood_body_exited(body):
+	if body.is_in_group("Player"):
+		in_player = true
+

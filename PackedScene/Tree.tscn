@@ -128,7 +128,7 @@ states/St3/node = SubResource( 12 )
 states/St3/position = Vector2( 559, 133 )
 transitions = [ "St2", "St1", SubResource( 13 ), "St1", "St3", SubResource( 14 ), "St3", "St2", SubResource( 15 ), "St1", "Hit", SubResource( 16 ), "Hit", "St1", SubResource( 17 ) ]
 start_node = "St1"
-graph_offset = Vector2( 105, 76 )
+graph_offset = Vector2( 104, 109 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
@@ -142,7 +142,6 @@ position = Vector2( 0.779537, -41.3409 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 3
-frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.208557, 0.362413 )

@@ -6,6 +6,7 @@ var minute : int = 1
 
 signal new_day()
 signal horde()
+signal hour()
 
 func _ready() -> void:
 	update()
@@ -26,6 +27,7 @@ func _on_Timer_timeout() -> void:
 	if minute >= 60:
 		minute = 0
 		hour += 1
+		emit_signal("hour")
 		
 		if hour == 24:
 			hour = 0

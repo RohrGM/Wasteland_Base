@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://Farm/dialogue_bk.png" type="Texture" id=2]
 [ext_resource path="res://Farm/farm_face1.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/TimeControl.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Food.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Log.png" type="Texture" id=6]
 
 [node name="Gui" type="CanvasLayer"]
 
@@ -110,17 +111,34 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Resources"]
-margin_left = 299.065
-margin_top = 2.07636
-margin_right = 339.065
-margin_bottom = 42.0764
+margin_left = 286.894
+margin_top = 16.0
+margin_right = 326.894
+margin_bottom = 56.0
 texture = ExtResource( 5 )
 
 [node name="Food" type="Label" parent="Resources"]
-margin_left = 292.171
-margin_top = 7.02611
-margin_right = 332.171
-margin_bottom = 21.0261
+margin_left = 280.0
+margin_top = 20.9498
+margin_right = 320.0
+margin_bottom = 34.9498
+rect_scale = Vector2( 0.5, 0.5 )
+text = "01"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Resources"]
+margin_left = 286.894
+margin_right = 326.894
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+
+[node name="Wood" type="Label" parent="Resources"]
+margin_left = 280.0
+margin_top = 4.94975
+margin_right = 320.0
+margin_bottom = 18.9498
 rect_scale = Vector2( 0.5, 0.5 )
 text = "01"
 __meta__ = {

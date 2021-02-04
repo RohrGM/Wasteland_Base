@@ -12,7 +12,7 @@ func _unhandled_input(event):
 func interact() -> void:
 	$Icon.hide()
 	get_node("../Barricade").position = Vector2.ZERO
-	get_node("../../Nav").set_barricade()
+#	get_node("../../Nav").set_barricade()
 	
 	for i in get_tree().get_nodes_in_group("BarricadeBase"):
 		i.queue_free()

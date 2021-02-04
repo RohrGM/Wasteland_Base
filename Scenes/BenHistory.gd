@@ -8,6 +8,7 @@ onready var vgt : PackedScene = preload("res://PackedScene/Vagrant.tscn")
 
 var slugs : int = 0
 var food : int = 2
+var wood : int = 2
 
 enum{
 	AXE,
@@ -20,6 +21,7 @@ func _ready() -> void:
 	$Gui/TimeControl.connect("new_day", self, "new_day")
 	
 	update_food()
+	update_wood()
 	
 	for i in $InteractAreas.get_children():
 		i.connect("action", self, "action_event")
@@ -42,6 +44,20 @@ func add_food(var value : int) -> void:
 
 func update_food() -> void:
 	$Gui/Resources/Food.text = String(food)
+	
+func update_wood() -> void:
+	$Gui/Resources/Wood.text = String(wood)
+	
+func remove_wood(var value : int) -> bool:
+	if wood - value >= 0:
+		wood -= value
+		update_wood()
+		return true
+	return false
+	
+func add_wood(var value : int) -> void:
+	wood += value
+	update_wood()
 		
 func VagrantSp() -> void:
 	randomize()

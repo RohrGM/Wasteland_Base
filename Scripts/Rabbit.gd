@@ -9,6 +9,8 @@ var mv : Node2D = null
 var target_pos : Vector2 = Vector2.ZERO
 var alive : bool = true
 
+signal dead()
+
 func _ready() -> void:
 	home_pos = position
 	set_physics_process(false)
@@ -84,6 +86,7 @@ func dead() -> void:
 	var rabbit : Area2D = rd.instance()
 	get_parent().call_deferred("add_child", rabbit)
 	rabbit.position = position
+	emit_signal("dead")
 	queue_free()
 
 func _on_Timer_timeout() -> void:

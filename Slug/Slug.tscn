@@ -378,7 +378,7 @@ height = 2.3397
 radius = 10.6247
 
 [sub_resource type="CircleShape2D" id=37]
-radius = 53.0024
+radius = 128.878
 
 [node name="Slug" type="KinematicBody2D" groups=[
 "Enemy",
@@ -391,7 +391,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 vframes = 14
 hframes = 4
-frame = 8
+frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_behind = SubResource( 1 )
@@ -435,7 +435,6 @@ shape = SubResource( 36 )
 autostart = true
 
 [node name="View" type="Area2D" parent="."]
-visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View"]

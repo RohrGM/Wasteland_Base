@@ -374,6 +374,7 @@ one_shot = true
 [connection signal="area_entered" from="View" to="." method="_on_View_area_entered"]
 [connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
 [connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]
-[connection signal="area_entered" from="TakeWood" to="." method="_on_TakeWood_area_entered"]
+[connection signal="body_entered" from="TakeWood" to="." method="_on_TakeWood_body_entered"]
+[connection signal="body_exited" from="TakeWood" to="." method="_on_TakeWood_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="InPlayer" to="." method="_on_InPlayer_timeout"]

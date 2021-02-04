@@ -45,7 +45,7 @@ func get_tools() -> int:
 	return tools
 
 func interact() -> void:
-	if tools < 6:
+	if tools < 6 and get_parent().get_parent().remove_wood(1):
 		tools += 1
 		set_anim(tools)
 		$Timer.start()
@@ -72,6 +72,7 @@ func up_npc(npc) -> void:
 
 func _on_ToolsAxe_body_entered(body) -> void:
 	if body.is_in_group("Player"):
+		$Icon.show()
 		set_process_unhandled_input(true)
 		
 	if body.is_in_group("No_tool"):
@@ -81,6 +82,7 @@ func _on_ToolsAxe_body_entered(body) -> void:
 
 func _on_ToolsAxe_body_exited(body) -> void:
 	if body.is_in_group("Player"):
+		$Icon.hide()
 		set_process_unhandled_input(false)
 	if body.is_in_group("No_tool"):
 			npcs.erase(body)
