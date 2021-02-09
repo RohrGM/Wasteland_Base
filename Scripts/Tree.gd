@@ -1,7 +1,7 @@
 extends Area2D
 
 var free : bool = true
-var life : int = 30
+var life : int = 2
 var time : int = 4
 
 func hit(var agent : KinematicBody2D) -> void:

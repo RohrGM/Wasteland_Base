@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Barricade1.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/BarricadeCell.gd" type="Script" id=2]
@@ -1419,7 +1419,7 @@ tracks/15/keys = {
 "values": [ -96.0 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=9]
 resource_name = "8"
 length = 2.0
 tracks/0/type = "value"
@@ -1615,124 +1615,65 @@ tracks/15/keys = {
 "values": [ -90.0 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "0"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "1"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "2"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "3"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "4"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "5"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "6"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "7"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "8"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
-switch_mode = 2
-xfade_time = 0.5
+[sub_resource type="AnimationNodeBlendSpace1D" id=28]
+blend_point_0/node = SubResource( 19 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 20 )
+blend_point_1/pos = 16.6
+blend_point_2/node = SubResource( 21 )
+blend_point_2/pos = 29.5
+blend_point_3/node = SubResource( 22 )
+blend_point_3/pos = 39.6
+blend_point_4/node = SubResource( 23 )
+blend_point_4/pos = 53.1
+blend_point_5/node = SubResource( 24 )
+blend_point_5/pos = 64.8
+blend_point_6/node = SubResource( 25 )
+blend_point_6/pos = 79.8
+blend_point_7/node = SubResource( 26 )
+blend_point_7/pos = 88.4
+blend_point_8/node = SubResource( 27 )
+blend_point_8/pos = 100.0
+min_space = 0.0
+max_space = 100.0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
-switch_mode = 2
-xfade_time = 0.5
+[sub_resource type="AnimationNodeStateMachine" id=45]
+states/Idle/node = SubResource( 28 )
+states/Idle/position = Vector2( 376.48, -12.5881 )
+start_node = "Idle"
+end_node = "Idle"
+graph_offset = Vector2( 57.4799, 302.412 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
-switch_mode = 2
-xfade_time = 0.5
+[sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
-switch_mode = 2
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
-switch_mode = 2
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=22]
-switch_mode = 2
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-switch_mode = 2
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=26]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=27]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-switch_mode = 2
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
-switch_mode = 2
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachine" id=31]
-states/0/node = SubResource( 9 )
-states/0/position = Vector2( 325, 109 )
-states/1/node = SubResource( 10 )
-states/1/position = Vector2( 325, 183 )
-states/2/node = SubResource( 11 )
-states/2/position = Vector2( 325, 247 )
-states/3/node = SubResource( 12 )
-states/3/position = Vector2( 325, 309 )
-states/4/node = SubResource( 13 )
-states/4/position = Vector2( 325, 368 )
-states/5/node = SubResource( 14 )
-states/5/position = Vector2( 325, 431 )
-states/6/node = SubResource( 15 )
-states/6/position = Vector2( 325, 502 )
-states/7/node = SubResource( 16 )
-states/7/position = Vector2( 427.48, 502 )
-states/8/node = SubResource( 35 )
-states/8/position = Vector2( 466.48, 113.124 )
-transitions = [ "0", "1", SubResource( 17 ), "1", "2", SubResource( 18 ), "2", "3", SubResource( 19 ), "3", "4", SubResource( 20 ), "4", "5", SubResource( 21 ), "5", "6", SubResource( 22 ), "6", "7", SubResource( 23 ), "7", "6", SubResource( 24 ), "6", "5", SubResource( 25 ), "5", "4", SubResource( 26 ), "4", "3", SubResource( 27 ), "3", "2", SubResource( 28 ), "2", "1", SubResource( 29 ), "1", "0", SubResource( 30 ), "7", "8", SubResource( 36 ), "8", "7", SubResource( 37 ) ]
-start_node = "0"
-end_node = "8"
-graph_offset = Vector2( -46.5201, -94.5881 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=32]
-
-[sub_resource type="CapsuleShape2D" id=33]
+[sub_resource type="CapsuleShape2D" id=47]
 radius = 5.00003
 height = 21.9999
 
@@ -1803,14 +1744,15 @@ anims/4 = SubResource( 5 )
 anims/5 = SubResource( 6 )
 anims/6 = SubResource( 7 )
 anims/7 = SubResource( 8 )
-anims/8 = SubResource( 34 )
+anims/8 = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 31 )
+tree_root = SubResource( 45 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 32 )
+parameters/playback = SubResource( 46 )
+parameters/Idle/blend_position = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
-shape = SubResource( 33 )
+shape = SubResource( 47 )

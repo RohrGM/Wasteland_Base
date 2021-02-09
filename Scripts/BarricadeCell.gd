@@ -1,4 +1,6 @@
 extends StaticBody2D
+func _ready() -> void:
+	update_anim(0)
 
-func travel_anim(anim : String) -> void:
-	$AnimationTree.get("parameters/playback").travel(anim)
+func update_anim(value : int) -> void:
+	$AnimationTree.set("parameters/Idle/blend_position", value)
