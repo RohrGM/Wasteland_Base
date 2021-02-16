@@ -11,7 +11,7 @@ var mv : Node2D = null
 var target_pos : Vector2 = Vector2.ZERO
 var alive : bool = true
 
-signal death()
+signal dead(value)
 
 func _ready() -> void:
 	home_pos = Vector2(-6, -10)
@@ -60,9 +60,8 @@ func move_at(pos : Vector2) -> void:
 	stop_move()
 	mv = m.instance()
 	add_child(mv)
-	mv.start(pos)
+	mv.start(pos, 30)
 	mv.connect("in_position", self, "_on_MoveAt_in_position")
-	mv.start(pos)
 	
 func stop_move() -> void:
 	if mv != null:
@@ -115,7 +114,7 @@ func dead() -> void:
 	get_parent().add_child(blood)
 	blood.position = position	
 	blood.get_child(0).current_animation = "dead"
-	emit_signal("death")
+	emit_signal("dead", self)
 	queue_free()
 	
 
@@ -129,13 +128,13 @@ func _on_MoveAt_in_position() -> void:
 		$Timer.start()
 		
 func _on_View_body_entered(body) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") or body.is_in_group("Npc"):
 		$Timer.stop()
 		enemys.append(body)
 		set_physics_process(true)
 
 func _on_View_body_exited(body) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") or body.is_in_group("Npc"):
 		enemys.erase(body)
 		if enemys.size() < 1:
 			set_physics_process(false)

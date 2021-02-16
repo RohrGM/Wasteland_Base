@@ -100,6 +100,7 @@ func spawTools(var type : int, var pos : Vector2) -> void:
 	
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):
+		$Area2D.queue_free()
 		$YSort/Fireplace/AnimationPlayer.current_animation = "fire"
 		$YSort/Fireplace/Particles2D.emitting = true
 		$Timer.wait_time = 2
@@ -110,7 +111,7 @@ func _on_Area2D_body_entered(body):
 		yield($Timer, "timeout")
 		spawTools(AXE, Vector2(-87, -11))
 		spawTools(RIFLE, Vector2(90, -12))
-		$Area2D.queue_free()
+		
 
 func slug_dead() -> void:
 	pass

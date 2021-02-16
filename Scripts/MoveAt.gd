@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var nav : Navigation2D = get_tree().get_root().get_node("World")
-var speed : int = 30
+var speed : int = 5
 
 var end_pos = Vector2()
 var path = []

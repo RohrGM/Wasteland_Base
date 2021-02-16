@@ -8,7 +8,7 @@ radius = 2.26796
 height = 2.3397
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 10.6247
+radius = 7.80741
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 60.9997
@@ -326,7 +326,7 @@ position = Vector2( 0, -6 )
 texture = ExtResource( 1 )
 vframes = 9
 hframes = 6
-frame = 7
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.150685, -0.0562285 )
@@ -340,7 +340,7 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( -0.840897, 1.26134 )
+position = Vector2( -0.981205, 2.80473 )
 shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]

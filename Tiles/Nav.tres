@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=5 format=2]
+[gd_resource type="TileSet" load_steps=6 format=2]
 
 [ext_resource path="res://Tiles/black.png" type="Texture" id=1]
 
@@ -13,9 +13,8 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1 ), PoolIntArray( 
 outlines = [ PoolVector2Array( 32, 0, 32, 32, 0, 32, 0, 0 ), PoolVector2Array( 4, 8, 28, 8, 30, 10, 30, 20, 28, 22, 4, 22, 2, 20, 2, 10 ) ]
 
 [sub_resource type="NavigationPolygon" id=3]
-vertices = PoolVector2Array( 32, 0, 32, 6, 0, 6, 0, 0, 0, 32, 0, 26, 32, 26, 32, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 5, 6, 7 ) ]
-outlines = [ PoolVector2Array( 32, 0, 32, 6, 0, 6, 0, 0 ), PoolVector2Array( 32, 32, 32, 26, 0, 26, 0, 32 ) ]
+
+[sub_resource type="NavigationPolygon" id=4]
 
 [resource]
 0/name = "Complelto"
@@ -77,3 +76,18 @@ outlines = [ PoolVector2Array( 32, 0, 32, 6, 0, 6, 0, 0 ), PoolVector2Array( 32,
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
+4/name = "BordasV"
+4/texture = ExtResource( 1 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 32, 0, 32, 32 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/navigation = SubResource( 4 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0

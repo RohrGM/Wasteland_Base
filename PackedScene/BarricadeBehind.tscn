@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 176, 10 )
 
-[node name="BarricadeBehind" type="YSort"]
+[node name="BarricadeBehind" type="YSort" groups=[
+"B",
+]]
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="." groups=[

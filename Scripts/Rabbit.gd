@@ -9,7 +9,7 @@ var mv : Node2D = null
 var target_pos : Vector2 = Vector2.ZERO
 var alive : bool = true
 
-signal dead()
+signal dead(value)
 
 func _ready() -> void:
 	home_pos = position
@@ -80,13 +80,13 @@ func run_away(pos: Vector2) -> Vector2:
 	return new_pos
 	
 func take_damage(_value : int = 1) -> void:
-	pass
+	dead()
 	
 func dead() -> void:
 	var rabbit : Area2D = rd.instance()
 	get_parent().call_deferred("add_child", rabbit)
 	rabbit.position = position
-	emit_signal("dead")
+	emit_signal("dead", self)
 	queue_free()
 
 func _on_Timer_timeout() -> void:
@@ -98,7 +98,7 @@ func _on_MoveAt_in_position() -> void:
 	$Timer.start()
 		
 func _on_View_body_entered(body) -> void:
-	if body.is_in_group("Player") or body.is_in_group("NPC"):
+	if body.is_in_group("Player") or body.is_in_group("Npc"):
 		move_at(run_away(body.position), 40, "Run")
 
 func _on_View_body_exited(body) -> void:

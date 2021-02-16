@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Log.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 12.9999
+radius = 17.9999
 height = 37.7364
 
 [sub_resource type="CapsuleShape2D" id=2]

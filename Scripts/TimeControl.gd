@@ -7,6 +7,7 @@ var minute : int = 1
 signal new_day()
 signal horde()
 signal hour()
+signal night()
 
 func _ready() -> void:
 	update()
@@ -34,7 +35,9 @@ func _on_Timer_timeout() -> void:
 		elif hour == 8:
 			day += 1
 			emit_signal("new_day")
-		elif hour == 22:
+		elif hour == 23:
 			emit_signal("horde")
+		elif hour == 22:
+			emit_signal("night")
 	update()
 

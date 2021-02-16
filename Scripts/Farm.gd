@@ -8,7 +8,7 @@ onready var fd : PackedScene = preload("res://PackedScene/Food.tscn")
 
 
 const ACCELERATION : int = 550
-const MAX_SPEED : int = 40
+const MAX_SPEED : int = 90
 const FRICTION : int = 20000
 
 var velocity : Vector2 = Vector2.ZERO

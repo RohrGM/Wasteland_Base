@@ -13,7 +13,7 @@ func spaw() -> void:
 	rabbit.position = position + Vector2(0, -10)
 	rabbit.connect("dead", self, "_rabbit_dead")
 	
-func _rabbit_dead() -> void:
+func _rabbit_dead(rb) -> void:
 	get_node("../../../Gui/TimeControl").connect("hour", self, "_hour_passed")
 	
 func _hour_passed() -> void:

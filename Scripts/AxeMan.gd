@@ -90,8 +90,15 @@ func new_action() -> void:
 		BUILD:
 			if get_parent().have_building():
 				objective = get_parent().get_building()
-				move_at(objective.position, "Run")
-				
+				randomize()
+				if objective.is_in_group("F"):
+					move_at(Vector2(objective.position.x -120 + randi() % 240, objective.position.y + 5), "Run")
+				elif objective.is_in_group("B"):
+					move_at(Vector2(objective.position.x -120 + randi() % 240, objective.position.y - 5), "Run")
+				elif objective.is_in_group("R"):
+					move_at(Vector2(objective.position.x - 8, objective.position.y -120 + randi() % 240), "Run")
+				else:
+					move_at(Vector2(objective.position.x + 8, objective.position.y -120 + randi() % 240), "Run")
 		SURVIVE:
 			home()
 			
@@ -167,7 +174,8 @@ func tree_down() -> void:
 #BUILD FUNCTIONS##################################################################################################################################
 func build_hit() -> void:
 	if objective != null:
-		objective.hit()
+		if !objective.is_in_group("Tree"):
+			objective.hit()
 		
 func end_build() -> void:
 	objective = null
@@ -188,7 +196,7 @@ func _on_MoveAt_in_position() -> void:
 			else:
 				new_action()
 		BUILD:
-			if position.distance_to(objective.position) < 20:
+			if position.distance_to(objective.position) < 120:
 				set_anim_direction(objective.position)
 				travel_anim("Build")
 			else:

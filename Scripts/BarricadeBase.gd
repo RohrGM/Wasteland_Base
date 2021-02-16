@@ -1,4 +1,6 @@
 extends YSort
+export var level : int = 0
+export var type : String = "b"
 
 func _ready():
 	set_process_unhandled_input(false)
@@ -10,7 +12,7 @@ func _unhandled_input(event):
 		
 func interact() -> void:
 	$Icon.hide()
-	get_parent().build_barricade(1, "b")
+	get_parent().build_barricade(level, type, position)
 	queue_free()
 
 func _on_Area2D_body_entered(body):
