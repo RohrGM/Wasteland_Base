@@ -19,6 +19,7 @@ enum{
 func _ready() -> void:
 	$Gui/TimeControl.connect("horde", self, "horde_from_hell")
 	$Gui/TimeControl.connect("new_day", self, "new_day")
+
 	
 	update_food()
 	update_wood()

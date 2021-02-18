@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Dialogue.gd" type="Script" id=1]
 [ext_resource path="res://Farm/dialogue_bk.png" type="Texture" id=2]
@@ -6,6 +6,14 @@
 [ext_resource path="res://Scripts/TimeControl.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Food.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Log.png" type="Texture" id=6]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 0.0627451, 0.054902, 0.101961, 1, 1, 0.796078, 0.101961, 1, 1, 1, 1, 1 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.421875, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.2, 0.160784, 0.321569, 1, 0.0627451, 0.054902, 0.101961, 1 )
 
 [node name="Gui" type="CanvasLayer"]
 
@@ -81,9 +89,11 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+light_day = SubResource( 1 )
+light_night = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="TimeControl"]
-wait_time = 0.1
+wait_time = 0.05
 autostart = true
 
 [node name="Day" type="Label" parent="TimeControl"]

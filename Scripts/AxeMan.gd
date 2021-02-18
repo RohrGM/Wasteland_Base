@@ -72,7 +72,7 @@ func stop_move() -> void:
 		mv.queue_free()
 
 
-func new_action() -> void:
+func new_action(move : bool = false) -> void:
 	match mode:
 		LUMBERJACK:
 			if objective == null:
