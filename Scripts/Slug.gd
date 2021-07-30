@@ -7,6 +7,7 @@ onready var dd : PackedScene = preload("res://Slug/BloodDead.tscn")
 
 var home_pos : Vector2 = Vector2.ZERO
 var enemys : Array = []
+var barricade : YSort = null
 var mv : Node2D = null
 var target_pos : Vector2 = Vector2.ZERO
 var alive : bool = true
@@ -17,9 +18,9 @@ func _ready() -> void:
 	home_pos = Vector2(-6, -10)
 	set_physics_process(false)
 	travel_anim("Idle")
+	barricade = get_node("/root/World").get_barricade
 	
 func _physics_process(_delta):
-	
 	if enemys[0].position.distance_to(position) > 10:
 		move_at(enemys[0].position)
 	else:
@@ -37,30 +38,33 @@ func update_anim_tree(vector : Vector2) -> void:
 	$AnimationTree.set("parameters/Attack/blend_position", vector)
 
 func new_action() -> void:
-
-#	var sort_ac : int = int(rand_range(0, 3))
-	var sort_ac : int = 0
-	if sort_ac < 1:
-		
-		var new_pos : Vector2 = sort_pos(position)
-		if position.distance_to(home_pos) > 90:
-			new_pos = sort_pos(home_pos)
-		else:
-			while new_pos.distance_to(home_pos) > 100:
-				new_pos = sort_pos(position)
-				
-		move_at(new_pos)
-	
+	if barricade != null:
+		move_at(barricade.position)
 	else:
-		update_anim_tree(sort_direction())
-		$Timer.wait_time = rand_range(1, 5)
-		$Timer.start()
+
+	#	var sort_ac : int = int(rand_range(0, 3))
+		var sort_ac : int = 0
+		if sort_ac < 1:
+			
+			var new_pos : Vector2 = sort_pos(position)
+			if position.distance_to(home_pos) > 90:
+				new_pos = sort_pos(home_pos)
+			else:
+				while new_pos.distance_to(home_pos) > 100:
+					new_pos = sort_pos(position)
+					
+			move_at(new_pos)
+		
+		else:
+			update_anim_tree(sort_direction())
+			$Timer.wait_time = rand_range(1, 5)
+			$Timer.start()
 		
 func move_at(pos : Vector2) -> void:
 	stop_move()
 	mv = m.instance()
 	add_child(mv)
-	mv.start(pos, 30)
+	mv.start(get_parent().get_parent().get_closest_point(pos), 30)
 	mv.connect("in_position", self, "_on_MoveAt_in_position")
 	
 func stop_move() -> void:
@@ -122,7 +126,12 @@ func _on_Timer_timeout() -> void:
 	new_action()
 	
 func _on_MoveAt_in_position() -> void:
-	if enemys.size() < 1:
+	if barricade != null:
+		if position.distance_to(barricade.position) < 20:
+			attack()
+		else:
+			new_action()
+	elif enemys.size() < 1:
 		travel_anim("Idle")
 		$Timer.wait_time = rand_range(1, 5)
 		$Timer.start()

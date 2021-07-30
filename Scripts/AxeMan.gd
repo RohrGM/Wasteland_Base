@@ -34,7 +34,7 @@ func _ready() -> void:
 		set_mode(SURVIVE)
 
 	get_node("../../Gui/TimeControl").connect("new_day", self, "_new_day")
-	get_node("../../Gui/TimeControl").connect("horde", self, "_night")
+	get_node("../../Gui/TimeControl").connect("night", self, "_night")
 	
 func set_home(pos : Vector2) -> void:
 	home_pos = pos
@@ -46,7 +46,7 @@ func set_mode(md : int) -> void:
 	mode = md
 	new_action()
 	
-func take_damage(_value : int = 1) -> void:
+func take_damage(value : int = 1) -> void:
 	pass
 
 func dead() -> void:

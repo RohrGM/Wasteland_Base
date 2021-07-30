@@ -157,7 +157,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, 3 )
 texture = ExtResource( 2 )
 offset = Vector2( 2, -13 )
-vframes = 4
+vframes = 5
 hframes = 6
 frame = 6
 

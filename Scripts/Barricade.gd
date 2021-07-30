@@ -4,6 +4,9 @@ onready var behind1 : PackedScene = preload("res://PackedScene/BarricadeBehind.t
 onready var forward1 : PackedScene = preload("res://PackedScene/BarricadeForward.tscn")
 onready var right1 : PackedScene = preload("res://PackedScene/BarricadeRight.tscn")
 onready var left1 : PackedScene = preload("res://PackedScene/BarricadeLeft.tscn")
+
+var nvl1 : bool = true
+
 func build_barricade(var nvl : int , var type : String, pos : Vector2) -> void:
 	match nvl:
 		1:
@@ -29,6 +32,7 @@ func build_barricade(var nvl : int , var type : String, pos : Vector2) -> void:
 				$Nv1.call_deferred("add_child", new)
 				new.position = pos
 			get_parent().add_building(new)
+			
 			
 			
 				

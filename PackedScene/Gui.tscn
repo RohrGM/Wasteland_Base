@@ -9,7 +9,7 @@
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.5, 1 )
-colors = PoolColorArray( 0.0627451, 0.054902, 0.101961, 1, 1, 0.796078, 0.101961, 1, 1, 1, 1, 1 )
+colors = PoolColorArray( 0.0627451, 0.054902, 0.101961, 1, 0.843137, 0.682353, 0.596078, 1, 1, 1, 1, 1 )
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.421875, 1 )
@@ -93,7 +93,6 @@ light_day = SubResource( 1 )
 light_night = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="TimeControl"]
-wait_time = 0.05
 autostart = true
 
 [node name="Day" type="Label" parent="TimeControl"]

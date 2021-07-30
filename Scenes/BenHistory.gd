@@ -8,7 +8,9 @@ onready var vgt : PackedScene = preload("res://PackedScene/Vagrant.tscn")
 
 var slugs : int = 0
 var food : int = 2
-var wood : int = 2
+var wood : int = 50
+
+var barricade : YSort 
 
 enum{
 	AXE,
@@ -99,11 +101,12 @@ func spawTools(var type : int, var pos : Vector2) -> void:
 	tools.type = type
 	tools.position = pos
 	
+func get_barricade() -> YSort:
+	return barricade
+	
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):
 		$Area2D.queue_free()
-		$YSort/Fireplace/AnimationPlayer.current_animation = "fire"
-		$YSort/Fireplace/Particles2D.emitting = true
 		$Timer.wait_time = 2
 		$Timer.start()
 		yield($Timer, "timeout")

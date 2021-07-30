@@ -11,9 +11,10 @@ func _unhandled_input(event):
 		interact()
 		
 func interact() -> void:
-	$Icon.hide()
-	get_parent().build_barricade(level, type, position)
-	queue_free()
+	if get_parent().get_parent().get_parent().remove_wood(10):
+		$Icon.hide()
+		get_parent().build_barricade(level, type, position)
+		queue_free()
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("Player"):

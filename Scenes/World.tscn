@@ -936,4 +936,5 @@ position = Vector2( 4, 16 )
 shape = SubResource( 4 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

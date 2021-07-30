@@ -1,9 +1,10 @@
 [gd_scene load_steps=68 format=2]
 
-[ext_resource path="res://PackedScene/RifleManTest.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/RifleManTest.gd" type="Script" id=1]
 [ext_resource path="res://People/RifleMan.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Light_Effect_PNG_Clip_Art_Image.png" type="Texture" id=3]
 [ext_resource path="res://Tiles/auto_tile.png" type="Texture" id=4]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "auto_tile.png 0"

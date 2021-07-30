@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/BarricadeStats.gd" type="Script" id=1]
 [ext_resource path="res://PackedScene/BLeft.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PackedScene/Gate.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 144, 10 )
@@ -53,3 +54,7 @@ type = "v"
 [node name="BLeft9" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 0, 96 )
 type = "v"
+
+[node name="Gate" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -32 )
+scale = Vector2( -1, 1 )

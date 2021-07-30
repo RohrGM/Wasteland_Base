@@ -3,10 +3,10 @@ extends Control
 onready var light_canvas : CanvasModulate = get_node("/root/World/CanvasModulate")
 
 var day : int = 1
-var hour : int = 8
+var hour : int = 21
 var minute : int = 1
 var time : float = .0
-var night : bool = false
+var ngt : bool = false
 
 export(Gradient) var light_day
 export(Gradient) var light_night
@@ -22,7 +22,7 @@ func _ready() -> void:
 	
 func _physics_process(delta):
 	time += .001
-	if night:
+	if ngt:
 		light_canvas.color = light_night.interpolate(time)
 	else:
 		light_canvas.color = light_day.interpolate(time)
@@ -54,13 +54,13 @@ func _on_Timer_timeout() -> void:
 		elif hour == 8:
 			day += 1
 			emit_signal("new_day")
-			night = false
+			ngt = false
 			set_physics_process(true)
 		elif hour == 23:
 			emit_signal("horde")
 		elif hour == 22:
 			emit_signal("night")
 			set_physics_process(true)
-			night = true
+			ngt = true
 	update()
 
