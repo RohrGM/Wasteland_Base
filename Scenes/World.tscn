@@ -876,7 +876,7 @@ type = "r"
 [node name="Nv1" type="YSort" parent="YSort/Barricade"]
 
 [node name="RifleMan" parent="YSort" instance=ExtResource( 18 )]
-position = Vector2( 60, 53.3181 )
+position = Vector2( 94, 28 )
 
 [node name="RifleMan2" parent="YSort" instance=ExtResource( 18 )]
 position = Vector2( 17.559, 33.6811 )
