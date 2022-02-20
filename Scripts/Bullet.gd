@@ -1,13 +1,12 @@
-extends RigidBody2D
+extends Node
 
-func _on_Area2D_area_entered(area) -> void:
-	if area.name == "HitBox" and area.get_parent().alive:
-		queue_free()
-		area.get_parent().take_damage()
-		
+var valid: bool = true
 
 func _on_Timer_timeout():
 	queue_free()
 
 func _on_Area2D_body_entered(body):
-	queue_free()
+	if valid and body.is_in_group("Enemy"):
+		valid = false
+		queue_free()
+		body.take_damage(10)

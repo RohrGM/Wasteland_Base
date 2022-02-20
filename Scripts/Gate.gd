@@ -1,44 +1,31 @@
-extends StaticBody2D
+extends KinematicBody2D
 
+onready var _world = get_tree().get_root().get_node("World")
+onready var _life_system = $LifeSystem
+
+var _current_attack_pos: int = 0
+
+export(String) var gate_name = "south"
 
 func _ready() -> void:
-	hide()
-	$CollisionShape2D.disabled = true
+	_world.set_gate(gate_name, self)
+	_life_system.set_life(500)
 	
-func open() -> void:
-	get_node("../../../../../Nav").set_gate(global_position, 1)
-	travel_anim("open")
-	for i in get_tree().get_nodes_in_group("Npc"):
-		i.stop_move()
-		i.new_action(true)
-	
-func close() -> void:
-	get_node("../../../../../Nav").set_gate(global_position, 0)
-	travel_anim("close")
-	$Timer.start()
-	yield($Timer, "timeout")
-	for i in get_tree().get_nodes_in_group("Npc"):
-		i.stop_move()
-		i.new_action(true)
+func is_alive() -> bool:
+	return _life_system.is_alive()
 
-func start() -> void:
-	show()
-	open()
-	$CollisionShape2D.disabled = false
-	get_node("/root/World/Gui/TimeControl").connect("new_day", self, "_new_day")
-	get_node("/root/World/Gui/TimeControl").connect("horde", self, "_horde")
+func get_attack_pos() -> Vector2:
+	var attack_points = $AttackPoints.get_children()
 	
+	_current_attack_pos += 1
+	if _current_attack_pos >= attack_points.size():
+		_current_attack_pos = 0
 	
-func end() -> void:
-	hide()
-	$CollisionShape2D.disabled = true
-	get_node("/root/World/Gui/TimeControl").disconnect("new_day", self, "_new_day")
-	get_node("/root/World/Gui/TimeControl").disconnect("horde", self, "_horde")
+	return attack_points[_current_attack_pos].global_position
+	
+func take_damage(damage: int) -> void:
+	_life_system.take_damage(damage)
 
-func travel_anim(anim : String) -> void:
-	$AnimationTree.get("parameters/playback").travel(anim)
-	
-func _horde() -> void:
-	close()
-func _new_day() -> void:
-	open()
+
+func _on_LifeSystem_dead():
+	queue_free()

@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="BarLife" type="ProgressBar"]
+margin_left = -9.0
+margin_top = -3.0
+margin_right = 86.0
+margin_bottom = 11.0
+rect_scale = Vector2( 0.2, 0.2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

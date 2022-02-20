@@ -1,34 +1,26 @@
-extends Area2D
+extends StaticBody2D
 
-var free : bool = true
-var life : int = 2
-var time : int = 4
 
-func hit(var agent : KinematicBody2D) -> void:
-	life -= 1
-	if life <= 0:
-		travel_anim("St3")
-		get_node("../../../Gui/TimeControl").connect("new_day", self, "_new_day")
-		agent.tree_down()
-		
-	else:
-		travel_anim("Hit")
-	
-func travel_anim(anim : String) -> void:
-	$AnimationTree.get("parameters/playback").travel(anim)
+var _life = 100
+var _valid = true
 
-func get_free() -> bool:
-	return free
-	
-func set_free(var value : bool) -> void:
-	free = value
-	
-func _new_day() -> void:
-	time -= 1
-	if time == 2:
-		travel_anim("St2")
-	elif time == 0:
-		time = 4
-		travel_anim("St1")
-		set_free(true)
-		get_node("../../../Gui/TimeControl").disconnect("new_day", self, "_new_day")
+func drop_tree():
+	$Sprite.scale = Vector2($Sprite.scale.x, .15)
+
+func is_valid():
+	return _valid
+
+func is_alive():
+	return true if _life > 0 else false
+
+func set_valid(value):
+	_valid = value
+
+func take_damage(damage : int):
+	_life -= damage
+	if _life <= 0:
+		drop_tree()
+		_valid = false
+
+func get_point():
+	return $Position2D.global_position

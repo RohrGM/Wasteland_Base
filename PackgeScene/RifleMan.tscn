@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/RifleMan.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Npcs/RifleMan.png" type="Texture" id=2]
+[ext_resource path="res://PackgeScene/NpcMoviment.tscn" type="PackedScene" id=3]
+[ext_resource path="res://PackgeScene/LifeSystem.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 15.0333
+
+[node name="RifleMan" type="RigidBody2D" groups=["Ally"]]
+collision_mask = 2
+mode = 2
+gravity_scale = 0.0
+script = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 1, -15 )
+texture = ExtResource( 2 )
+hframes = 4
+vframes = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 8 )
+
+[node name="View" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
+shape = SubResource( 9 )
+
+[node name="NpcMoviment" parent="." instance=ExtResource( 3 )]
+
+[node name="Wait_player" type="Timer" parent="."]
+one_shot = true
+
+[node name="LifeSystem" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1, 4 )
+
+[connection signal="body_entered" from="View" to="." method="_on_View_body_entered"]
+[connection signal="body_exited" from="View" to="." method="_on_View_body_exited"]
+[connection signal="on_positon" from="NpcMoviment" to="." method="_on_NpcMoviment_on_positon"]
+[connection signal="timeout" from="Wait_player" to="." method="_on_Wait_player_timeout"]
+[connection signal="dead" from="LifeSystem" to="." method="_on_LifeSystem_dead"]
